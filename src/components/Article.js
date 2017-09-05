@@ -13,6 +13,7 @@ class Article extends Component {
       {text: "Einstein was real smart.", links: ["E=MC2", "Genius"]},
       {text: "Super smart.", links: ["Brownian Stuff", "Black Holes"]},
     ]},
+    paragraph: 0
   }
 
   wikipedia = () => {
@@ -29,6 +30,14 @@ class Article extends Component {
 
   onChange = (event) => {
     console.log(event)
+    if (event === 0 && this.state.paragraph === Object.values(a)[0].length){
+      console.log(this.state.section)
+    }
+    else {
+      setState({
+        paragraph: event
+      })
+    }
   }
 
   render() {
