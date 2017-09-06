@@ -20,7 +20,7 @@ class Carousel extends Component {
         <CarouselAPI
           showThumbs={false}
           showStatus={false}
-          width="75%"
+          width="100%"
           useKeyboardArrows
           infiniteLoop={true}
           onChange={this.props.onChange}

@@ -26,8 +26,6 @@ class Article extends Component {
     let h2s = Object.keys(article)
     let h3s = Object.keys(article[h2s[this.state.currentH2]])
     let ps = article[h2s[this.state.currentH2]][h3s[this.state.currentH3]]
-    debugger
-    // My updateArticleState is causing issues with switching
     this.setState({
       h2s: h2s,
       h3s: h3s,
@@ -36,6 +34,7 @@ class Article extends Component {
   }
 
   changeSection = (action) => {
+    debugger
     switch (action) {
       case 'next':
         if (this.state.currentH3 === this.state.h3s.length - 1){
@@ -51,7 +50,6 @@ class Article extends Component {
           }, () => this.updateArticleState())
         }
         break;
-
       case 'previous':
         if (this.state.currentH3 === 0){
           this.setState({
@@ -66,8 +64,8 @@ class Article extends Component {
           }, () => this.updateArticleState())
         }
         break;
-        default:
-          console.warn(action, 'is invalid action')
+      default:
+        console.warn(action, 'is invalid action')
     }
   }
 

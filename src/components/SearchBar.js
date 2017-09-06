@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
 import { Search } from 'semantic-ui-react'
-import _ from 'lodash';
-import faker from 'faker';
 
-// If I fill source with articles and titles, this should work just fine.
-const source = _.times(5, () => ({
-  title: faker.company.companyName(),
-  description: faker.company.catchPhrase(),
-  image: faker.internet.avatar(),
-  price: faker.finance.amount(0, 100, 2, '$'),
-}))
 
 export default class SearchBar extends Component {
   componentWillMount() {
@@ -26,13 +17,13 @@ export default class SearchBar extends Component {
     setTimeout(() => {
       if (this.state.value.length < 1) return this.resetComponent()
 
-      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = result => re.test(result.title)
-
-      this.setState({
-        isLoading: false,
-        results: _.filter(source, isMatch),
-      })
+      fetch(`http://localhost:8080/articles/search?searchterm=${value}`)
+      .then(res => res.json())
+      .then(response => this.setState({
+          isLoading: false,
+          results: response,
+        })
+      )
     }, 500)
   }
 
