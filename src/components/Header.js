@@ -8,7 +8,8 @@ class Header extends Component {
           src="https://imgs.xkcd.com/comics/the_problem_with_wikipedia.png"
           alt="xkcd"
           width="20%"
-          height="20%" />
+          height="20%"
+        />
       </div>
     );
   }

@@ -5,17 +5,15 @@ import { Container } from 'semantic-ui-react'
 class Carousel extends Component {
 
   build_carousel() {
-    let section = this.props.section
-    return Object.values(section)[0].map((slide, index) => {
+    return this.props.ps.map((slide, index) => {
       return (
         <div className="my-slide primary" key={index}>
-          <h2>{Object.keys(section)[0]}</h2>
-          <p>{slide['text']}</p>
+          <h2>{this.props.currentH3}</h2>
+          <p>{slide.text}</p>
         </div>
       )
     })
   }
-
   render() {
     return (
       <Container>
@@ -26,9 +24,8 @@ class Carousel extends Component {
           useKeyboardArrows
           infiniteLoop={true}
           onChange={this.props.onChange}
-          className="presentation-mode"
-        >
-          {this.build_carousel()}
+          className="presentation-mode" >
+            {this.build_carousel()}
         </CarouselAPI>
       </Container>
     );
