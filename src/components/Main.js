@@ -5,12 +5,18 @@ import Article from './Article'
 import Related from './Related'
 
 class Main extends Component {
+  state = {
+    title: 'Albert_Einstein',
+  }
+
+  changeTitle = (title) => this.setState({title})
+
   render() {
     return (
       <div className="Main">
         <Header />
-        <SearchBar />
-        <Article />
+        <SearchBar changeTitle={this.changeTitle} />
+        <Article title={this.state.title}/>
         <Related />
       </div>
     );

@@ -7,9 +7,14 @@ class Carousel extends Component {
   build_carousel() {
     return this.props.ps.map((slide, index) => {
       return (
-        <div className="my-slide primary" key={index}>
-          <h2>{this.props.currentH3}</h2>
-          <p>{slide.text}</p>
+        <div className="presentation-mode my-slide" key={index}>
+          <p className="legend">
+            <strong>
+              {this.props.currentH2} - {this.props.currentH3}
+            </strong>
+            <br />
+            {slide.text}
+          </p>
         </div>
       )
     })
@@ -20,6 +25,7 @@ class Carousel extends Component {
         <CarouselAPI
           showThumbs={false}
           showStatus={false}
+          showArrows={true}
           width="100%"
           useKeyboardArrows
           infiniteLoop={true}

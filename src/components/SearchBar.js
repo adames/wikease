@@ -9,7 +9,10 @@ export default class SearchBar extends Component {
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
-  handleResultSelect = (e, { result }) => this.setState({ value: result.title })
+  handleResultSelect = (e, { result }) => {
+    this.props.changeTitle(result.title)
+    return this.resetComponent()
+  }
 
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value })
@@ -24,7 +27,7 @@ export default class SearchBar extends Component {
           results: response,
         })
       )
-    }, 500)
+    }, 800)
   }
 
   render() {
@@ -33,12 +36,13 @@ export default class SearchBar extends Component {
     return (
       <div className="Search">
           <Search
+            aligned='left'
             loading={isLoading}
             onResultSelect={this.handleResultSelect}
             onSearchChange={this.handleSearchChange}
             results={results}
             value={value}
-            {...this.props}
+            // {...this.props} // i will need this later to modify search box
           />
       </div>
     )
