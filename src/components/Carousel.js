@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import {Carousel as CarouselAPI} from 'react-responsive-carousel'
-import { Container } from 'semantic-ui-react'
 
-class Carousel extends Component {
+export default class Carousel extends Component {
 
-  build_carousel() {
+  build_carousel = () => {
     return this.props.ps.map((slide, index) => {
       return (
         <div className="presentation-mode my-slide" key={index}>
@@ -16,23 +15,23 @@ class Carousel extends Component {
       )
     })
   }
+
   render() {
     return (
-      <Container>
+      <div className='Carousel'>
         <CarouselAPI
+          selectedItem={this.props.currentP}
           showThumbs={false}
           showStatus={false}
-          showArrows={true}
+          showArrows={false}
           width="100%"
           useKeyboardArrows
           infiniteLoop={true}
-          onChange={this.props.onChange}
-          className="presentation-mode" >
-            {this.build_carousel()}
+          className="presentation-mode"
+        >
+          {this.build_carousel()}
         </CarouselAPI>
-      </Container>
+      </div>
     );
   }
 }
-
-export default Carousel;

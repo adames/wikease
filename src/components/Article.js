@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Segment } from 'semantic-ui-react'
 import Carousel from './Carousel'
 
 class Article extends Component {
@@ -36,10 +37,6 @@ class Article extends Component {
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-
-  }
-
   updateArticleState(){
     let article = this.state.article
     let h2s = Object.keys(article)
@@ -63,16 +60,16 @@ class Article extends Component {
     //finally, check if we're on the last h2. if not, change that and the previous
     switch (action) {
       case 'next':
-        if (this.state.currentP < this.state.ps.length){
+        if (this.state.currentP < this.state.ps.length - 1){
           this.setState({
             currentP: this.state.currentP + 1,
           }, () => this.updateArticleState())
-        } else if (this.state.currentH3 < this.state.h3s.length){
+        } else if (this.state.currentH3 < this.state.h3s.length - 1){
           this.setState({
             currentH3: this.state.currentH3 + 1,
             currentP: 0,
           }, () => this.updateArticleState())
-        } else if (this.state.currentH2 < this.state.h2s.length){
+        } else if (this.state.currentH2 < this.state.h2s.length - 1){
           this.setState({
             currentH2: this.state.currentH2 + 1,
             currentH3: 0,
@@ -102,32 +99,27 @@ class Article extends Component {
           console.log("could not execute previous")
         }
         break;
-      default:
-        console.warn(action, "invalid command")
     }
   }
 
-  onChange = (index, element) => {
-    // let paragraph = element.props.children.props.children[2]
-
-    if (index > this.state.currentP || (index === 0 && this.state.currentP === this.state.ps.length)){
-      console.log('next')
-      this.changeSection('next')
-    } else if (index < this.state.currentP || (index === this.state.ps.length && this.state.currentP === 0)) {
-      this.changeSection('previous')
-      console.log('previous')
-    }
+  next = () => {
+    this.changeSection('next')
   }
 
-
+  prev = () => {
+    this.changeSection('previous')
+  }
 
   render() {
     return (
       <div className="Article">
-        <Carousel
-          ps={this.state.ps}
-          onChange={this.onChange}
-        />
+        <Button.Group attached='top'>
+          <Button onClick={this.prev} >Prev</Button>
+          <Button onClick={this.next} >Next</Button>
+        </Button.Group>
+        <Segment attached >
+          <Carousel ps={this.state.ps} currentP={this.state.currentP}/>
+        </Segment >
       </div>
     );
   }
