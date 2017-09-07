@@ -9,9 +9,6 @@ class Carousel extends Component {
       return (
         <div className="presentation-mode my-slide" key={index}>
           <p className="legend">
-            <strong>
-              {this.props.currentH2} - {this.props.currentH3}
-            </strong>
             <br />
             {slide.text}
           </p>

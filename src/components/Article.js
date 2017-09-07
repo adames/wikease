@@ -36,24 +36,31 @@ class Article extends Component {
     }
   }
 
+  componentWillUpdate(nextProps, nextState) {
+
+  }
+
   updateArticleState(){
     let article = this.state.article
     let h2s = Object.keys(article)
     let h3s = Object.keys(article[h2s[this.state.currentH2]])
     let ps = article[h2s[this.state.currentH2]][h3s[this.state.currentH3]]
-    debugger
-    this.setState({
-      h2s: h2s,
-      h3s: h3s,
-      ps: ps,
-    })
+
+    let prevState = JSON.stringify([this.state.h2s, this.state.h3s, this.state.ps])
+    let nextState = JSON.stringify([h2s, h3s, ps])
+    if (prevState !== nextState) {
+      this.setState({
+        h2s: h2s,
+        h3s: h3s,
+        ps: ps,
+      })
+    }
   }
 
   changeSection = (action) => {
     //check if we're on the last p. if not, just change that
     // check if we're also on the last h3. if not, change that and the previous
     //finally, check if we're on the last h2. if not, change that and the previous
-    console.log('hit changesection')
     switch (action) {
       case 'next':
         if (this.state.currentP < this.state.ps.length){
@@ -100,22 +107,25 @@ class Article extends Component {
     }
   }
 
-  onChange = (index) => {
+  onChange = (index, element) => {
     // let paragraph = element.props.children.props.children[2]
+
     if (index > this.state.currentP || (index === 0 && this.state.currentP === this.state.ps.length)){
+      console.log('next')
       this.changeSection('next')
     } else if (index < this.state.currentP || (index === this.state.ps.length && this.state.currentP === 0)) {
       this.changeSection('previous')
+      console.log('previous')
     }
   }
+
+
 
   render() {
     return (
       <div className="Article">
         <Carousel
           ps={this.state.ps}
-          currentH3={this.state.h3s[this.state.currentH3]}
-          currentH2={this.state.h2s[this.state.currentH2]}
           onChange={this.onChange}
         />
       </div>
