@@ -5,10 +5,10 @@ class Header extends Component {
     return (
       <div className="Header">
         <img
-          src="https://imgs.xkcd.com/comics/the_problem_with_wikipedia.png"
+          src="Wikease.png"
           alt="xkcd"
-          width="20%"
-          height="20%"
+          width="50%"
+          height="50%"
         />
       </div>
     );

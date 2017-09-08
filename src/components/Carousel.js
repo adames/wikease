@@ -21,11 +21,10 @@ export default class Carousel extends Component {
       <div className='Carousel'>
         <CarouselAPI
           selectedItem={this.props.currentP}
-          showThumbs={false}
+          showIndicators={false}
           showStatus={false}
           showArrows={false}
           width="100%"
-          useKeyboardArrows
           infiniteLoop={true}
           className="presentation-mode"
         >

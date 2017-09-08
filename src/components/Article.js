@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Segment } from 'semantic-ui-react'
+import { Sidebar, Menu, Segment, Button, Image, Icon, Header } from 'semantic-ui-react'
 import Carousel from './Carousel'
+import ArticleMenu from './ArticleMenu'
 
 class Article extends Component {
   state = {
@@ -20,7 +21,10 @@ class Article extends Component {
       {text: "Did I say smart?", links: ["Brownian Stuff", "Black Holes"]},
     ],
     currentP: 0,
+    visible: false
   }
+
+  toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
   componentWillReceiveProps(nextProps){
     if (nextProps.title !== this.props.title) {
@@ -36,7 +40,6 @@ class Article extends Component {
       )
     }
   }
-
   updateArticleState(){
     let article = this.state.article
     let h2s = Object.keys(article)
@@ -53,7 +56,6 @@ class Article extends Component {
       })
     }
   }
-
   changeSection = (action) => {
     //check if we're on the last p. if not, just change that
     // check if we're also on the last h3. if not, change that and the previous
@@ -101,7 +103,6 @@ class Article extends Component {
         break;
     }
   }
-
   next = () => {
     this.changeSection('next')
   }
@@ -111,17 +112,27 @@ class Article extends Component {
   }
 
   render() {
+    const { visible } = this.state
     return (
-      <div className="Article">
-        <Button.Group attached='top'>
-          <Button onClick={this.prev} >Prev</Button>
-          <Button onClick={this.next} >Next</Button>
-        </Button.Group>
-        <Segment attached >
-          <Carousel ps={this.state.ps} currentP={this.state.currentP}/>
-        </Segment >
+      <div>
+        <Button onClick={this.toggleVisibility}>Chapters</Button>
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar as={Menu} animation='slide along' width='thin' visible={visible} vertical>
+            <ArticleMenu h2s={this.state.h2s} title={this.state.title}/>
+          </Sidebar>
+          <Sidebar.Pusher>
+            <Segment attached >
+              <Carousel ps={this.state.ps} currentP={this.state.currentP}/>
+            </Segment >
+            <Button.Group attached='bottom'>
+              <Button onClick={this.prev} >Prev</Button>
+              <Button onClick={this.next} >Next</Button>
+            </Button.Group>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+        <Related ps={this.state.ps}/>
       </div>
-    );
+    )
   }
 }
 
