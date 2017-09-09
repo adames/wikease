@@ -1,43 +1,44 @@
 import React, { Component } from 'react';
-import { Sidebar, Menu, Segment, Button, Image, Icon, Header } from 'semantic-ui-react'
+import { Header, Container, Sidebar, Menu, Segment, Button } from 'semantic-ui-react'
 import Carousel from './Carousel'
+import Related from './Related'
 import ArticleMenu from './ArticleMenu'
 
 class Article extends Component {
   state = {
     title: this.props.title,
-    article: {Overview: {Synopsis: [
-      {text: "Einstein was real smart.", links: ["E=MC2", "Genius"]},
-      {text: "Super smart.", links: ["Brownian Stuff", "Black Holes"]},
-      {text: "Did I say smart?", links: ["Brownian Stuff", "Black Holes"]},
-    ]}},
-    h2s: ['Overview'],
+    article: {},
+    h2s: [],
     currentH2: 0,
-    h3s: ['Synopsis'],
+    h3s: [],
     currentH3: 0,
-    ps: [
-      {text: "Einstein was real smart.", links: ["E=MC2", "Genius"]},
-      {text: "Super smart.", links: ["Brownian Stuff", "Black Holes"]},
-      {text: "Did I say smart?", links: ["Brownian Stuff", "Black Holes"]},
-    ],
+    ps: [],
     currentP: 0,
-    visible: false
+    visible: true,
+  }
+
+  componentDidMount() {
+   this.wikipedia('Albert Einstein')
+  }
+
+  wikipedia(title) {
+    fetch(`http://localhost:8080/articles?title=${title}`)
+    .then(res => res.json())
+    .then(results =>
+      this.setState({
+        article: results["article"],
+        currentH2: 0,
+        currentH3: 0,
+        currentP: 0,
+      }, () => this.updateArticleState())
+    )
   }
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
   componentWillReceiveProps(nextProps){
     if (nextProps.title !== this.props.title) {
-      fetch(`http://localhost:8080/articles?title=${nextProps.title}`)
-      .then(res => res.json())
-      .then(results =>
-        this.setState({
-          article: results["article"],
-          currentH2: 0,
-          currentH3: 0,
-          currentP: 0,
-        }, () => this.updateArticleState())
-      )
+      this.wikipedia(nextProps.title)
     }
   }
   updateArticleState(){
@@ -114,26 +115,32 @@ class Article extends Component {
   render() {
     const { visible } = this.state
     return (
-      <div>
-        <Button onClick={this.toggleVisibility}>Chapters</Button>
-        <Sidebar.Pushable as={Segment}>
+      <Container>
+        <Header as='h1' attached='top'>
+          {this.props.title}
+        </Header>
+        <Sidebar.Pushable as={Segment} attached>
           <Sidebar as={Menu} animation='slide along' width='thin' visible={visible} vertical>
-            <ArticleMenu h2s={this.state.h2s} title={this.state.title}/>
+            <ArticleMenu h2s={this.state.h2s}/>
           </Sidebar>
           <Sidebar.Pusher>
-            <Segment attached >
-              <Carousel ps={this.state.ps} currentP={this.state.currentP}/>
-            </Segment >
-            <Button.Group attached='bottom'>
-              <Button onClick={this.prev} >Prev</Button>
-              <Button onClick={this.next} >Next</Button>
-            </Button.Group>
+            <Carousel
+              ps={this.state.ps}
+              currentP={this.state.currentP}
+              currentH3Name={this.state.h3s[this.state.currentH3]}
+            />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-        <Related ps={this.state.ps}/>
-      </div>
+        <Button.Group attached='bottom'>
+        <Button onClick={this.prev} >Previous Paragraph</Button>
+        <Button onClick={this.next} >Next Paragraph</Button>
+        </Button.Group>
+        <Related ps={this.state.ps[this.state.currentP]}/>
+      </Container>
     )
   }
 }
 
 export default Article;
+// Removed for simplicity.
+//<Button onClick={this.toggleVisibility}>Navigate {this.state.title}</Button>

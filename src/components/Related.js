@@ -1,44 +1,58 @@
-import React from 'react'
-import { Card, Segment, Image } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import StackGrid from "react-stack-grid";
+import { Segment, Container, Card, Image } from 'semantic-ui-react'
 
-//TODO
-//test to see if formats correctly
-
-const Related = (props) => {
+class Related extends Component {
   state = {
-    relatedObjects: []
-  }
-  componentWillReceiveProps(nextProps){
-    fetch(`http://localhost:8080/articles?title=${nextProps.title}`)
-    .then(res => res.json())
-    .then(results =>
-      this.setState({
-        relatedObjects: results,
-      })
-    )
+    relatedObjects: [],
   }
 
-  cards = (relatedObjects) => {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps['ps'] !== undefined) {
+      let titles = nextProps['ps']['links'].join('|')
+      fetch(`http://localhost:8080/articles/related?titles=${titles}`)
+      .then(res => res.json())
+      .then(results =>
+        this.setState({
+          relatedObjects: results,
+        })
+      )
+    }
+  }
+
+  buildCards(relatedObjects) {
     return relatedObjects.map(item => {
       return (
-        <Card>
-          <Image src={item.image} />
-          <Card.Content>
-            <Card.Header>{item.title}</Card.Header>
-            <Card.Description>{item.extract}</Card.Description>
-          </Card.Content>
-        </Card>
+          <Card key={item.title}>
+            <Image src={item.image} />
+            <Card.Content>
+              <Card.Header>{item.title}</Card.Header>
+              <Card.Description>{item.extract}</Card.Description>
+            </Card.Content>
+          </Card>
       )
     })
   }
 
-  render (
-    <Segment>
-      <Card.Group>
-        {cards(state.relatedObjects)}
-      </Card.Group>
-    </Segment>
-  )
+  render () {
+    return (
+      <Container>
+        {this.state.relatedObjects.length !== 0 &&
+          <Segment basic padded>
+            <h2>Related Articles</h2>
+          </Segment>
+        }
+        <StackGrid
+          columnWidth={300}
+          gutterWidth={30}
+          gutterHeight={30}
+          monitorImagesLoaded={true}
+        >
+          {this.buildCards(this.state.relatedObjects)}
+        </StackGrid>
+      </Container>
+    )
+  }
 }
 
 export default Related

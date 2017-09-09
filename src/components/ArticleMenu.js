@@ -7,7 +7,7 @@ class ArticleMenu extends Component {
   buildMenu = () => {
     return this.props.h2s.map(h2 => {
       return (
-        <Menu.Item name={h2}>
+        <Menu.Item name={h2} key={h2}>
           {h2}
         </Menu.Item>
       )
@@ -17,9 +17,6 @@ class ArticleMenu extends Component {
   render() {
     return (
       <div className='ArticleMenu' >
-        <Menu.Item name={this.props.title}>
-          {this.props.title.toUpperCase()}
-        </Menu.Item>
         {this.buildMenu()}
       </div>
     );

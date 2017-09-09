@@ -9,6 +9,8 @@ export default class Carousel extends Component {
         <div className="presentation-mode my-slide" key={index}>
           <p className="legend">
             <br />
+            {this.props.currentH3Name}
+            <br /><br />
             {slide.text}
           </p>
         </div>
@@ -21,10 +23,11 @@ export default class Carousel extends Component {
       <div className='Carousel'>
         <CarouselAPI
           selectedItem={this.props.currentP}
+          showThumbs={false}
           showIndicators={false}
           showStatus={false}
           showArrows={false}
-          width="100%"
+          width="85%"
           infiniteLoop={true}
           className="presentation-mode"
         >

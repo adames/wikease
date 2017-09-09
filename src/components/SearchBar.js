@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Search } from 'semantic-ui-react'
+import { Search, Segment } from 'semantic-ui-react'
 
 
 export default class SearchBar extends Component {
@@ -34,17 +34,19 @@ export default class SearchBar extends Component {
     const { isLoading, value, results } = this.state
 
     return (
-      <div className="Search">
+      <Segment basic padded className='Search'>
           <Search
+            fluid
             aligned='left'
             loading={isLoading}
+            showNoResults={true}
             onResultSelect={this.handleResultSelect}
             onSearchChange={this.handleSearchChange}
             results={results}
             value={value}
             // {...this.props} // i will need this later to modify search box
           />
-      </div>
+      </Segment>
     )
   }
 }
