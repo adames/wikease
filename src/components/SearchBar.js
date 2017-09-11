@@ -20,7 +20,7 @@ export default class SearchBar extends Component {
     setTimeout(() => {
       if (this.state.value.length < 1) return this.resetComponent()
 
-      fetch(`http://localhost:8080/articles/search?searchterm=${value}`)
+      fetch(`https://wikeasebackend.herokuapp.com/articles/search?searchterm=${value}`)
       .then(res => res.json())
       .then(response => this.setState({
           isLoading: false,

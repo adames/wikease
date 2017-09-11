@@ -22,7 +22,7 @@ class Article extends Component {
   }
 
   wikipedia(title) {
-    fetch(`http://localhost:8080/articles?title=${title}`)
+    fetch(`https://wikeasebackend.herokuapp.com/articles?title=${title}`)
     .then(res => res.json())
     .then(results =>
       this.setState({

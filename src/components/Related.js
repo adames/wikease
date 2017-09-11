@@ -14,7 +14,7 @@ class Related extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps['ps'] !== undefined) {
       let titles = nextProps['ps']['links'].join('|')
-      fetch(`http://localhost:8080/articles/related?titles=${titles}`)
+      fetch(`https://wikeasebackend.herokuapp.com/articles/related?titles=${titles}`)
       .then(res => res.json())
       .then(results =>
         this.setState({
