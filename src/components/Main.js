@@ -15,7 +15,7 @@ class Main extends Component {
       <div className="Main">
         <Header />
         <SearchBar changeTitle={this.changeTitle} />
-        <Article title={this.state.title}/>
+        <Article title={this.state.title} changeTitle={this.changeTitle}/>
       </div>
     );
   }

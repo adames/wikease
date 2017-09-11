@@ -7,6 +7,10 @@ class Related extends Component {
     relatedObjects: [],
   }
 
+  handleClick = (event) => {
+    this.props.changeTitle(event.currentTarget.children[1].children[0].innerText)
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps['ps'] !== undefined) {
       let titles = nextProps['ps']['links'].join('|')
@@ -23,7 +27,7 @@ class Related extends Component {
   buildCards(relatedObjects) {
     return relatedObjects.map(item => {
       return (
-          <Card key={item.title}>
+          <Card key={item.title} onClick={this.handleClick}>
             <Image src={item.image} />
             <Card.Content>
               <Card.Header>{item.title}</Card.Header>

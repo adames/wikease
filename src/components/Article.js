@@ -102,6 +102,12 @@ class Article extends Component {
           console.log("could not execute previous")
         }
         break;
+      default:
+        this.setState({
+          currentH2: this.state.h2s.findIndex(h2 => h2 === action),
+          currentH3: 0,
+          currentP: 0,
+        }, () => this.updateArticleState())
     }
   }
   next = () => {
@@ -121,7 +127,11 @@ class Article extends Component {
         </Header>
         <Sidebar.Pushable as={Segment} attached>
           <Sidebar as={Menu} animation='slide along' width='thin' visible={visible} vertical>
-            <ArticleMenu h2s={this.state.h2s}/>
+            <ArticleMenu
+              h2s={this.state.h2s}
+              changeSection={this.changeSection}
+              currentH2Name={this.state.h2s[this.state.currentH2]}
+            />
           </Sidebar>
           <Sidebar.Pusher>
             <Carousel
@@ -132,10 +142,13 @@ class Article extends Component {
           </Sidebar.Pusher>
         </Sidebar.Pushable>
         <Button.Group attached='bottom'>
-        <Button onClick={this.prev} >Previous Paragraph</Button>
-        <Button onClick={this.next} >Next Paragraph</Button>
+        <Button onClick={this.prev}>Previous Paragraph</Button>
+        <Button onClick={this.next}>Next Paragraph</Button>
         </Button.Group>
-        <Related ps={this.state.ps[this.state.currentP]}/>
+        <Related
+          ps={this.state.ps[this.state.currentP]}
+          changeTitle={this.props.changeTitle}
+        />
       </Container>
     )
   }
