@@ -11,6 +11,7 @@ export default class SearchBar extends Component {
 
   handleResultSelect = (e, { result }) => {
     this.props.changeTitle(result.title)
+    window.location = "#Article";
     return this.resetComponent()
   }
 
@@ -37,14 +38,12 @@ export default class SearchBar extends Component {
       <Segment basic padded className='Search'>
           <Search
             fluid
-            aligned='left'
             loading={isLoading}
             showNoResults={true}
             onResultSelect={this.handleResultSelect}
             onSearchChange={this.handleSearchChange}
             results={results}
             value={value}
-            // {...this.props} // i will need this later to modify search box
           />
       </Segment>
     )

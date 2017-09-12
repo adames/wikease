@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar'
-import { Image, Segment } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react'
 
 
 export default class SearchPage extends Component {

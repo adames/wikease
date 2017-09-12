@@ -43,7 +43,7 @@ class Related extends Component {
       <Container>
         {this.state.relatedObjects.length !== 0 &&
           <Segment basic padded>
-            <h2>Related Articles</h2>
+            <h2 id="Related">Related Articles</h2>
           </Segment>
         }
         <StackGrid

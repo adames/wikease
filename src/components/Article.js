@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Header, Container, Sidebar, Menu, Segment, Button } from 'semantic-ui-react'
+import { Grid, Header, Menu, Segment, Button } from 'semantic-ui-react'
 import Carousel from './Carousel'
 import Related from './Related'
 import ArticleMenu from './ArticleMenu'
@@ -121,7 +121,7 @@ class Article extends Component {
   render() {
     return (
       <Segment basic>
-        <Header as='h1' attached='top'>
+        <Header as='h1' attached='top' id="Article">
           {this.props.title}
         </Header>
         <Grid>
