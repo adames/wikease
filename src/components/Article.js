@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Container, Sidebar, Menu, Segment, Button } from 'semantic-ui-react'
+import { Grid, Header, Container, Sidebar, Menu, Segment, Button } from 'semantic-ui-react'
 import Carousel from './Carousel'
 import Related from './Related'
 import ArticleMenu from './ArticleMenu'
@@ -119,28 +119,29 @@ class Article extends Component {
   }
 
   render() {
-    const { visible } = this.state
     return (
-      <Segment attached='top'>
+      <Segment basic>
         <Header as='h1' attached='top'>
           {this.props.title}
         </Header>
-        <Sidebar.Pushable as={Segment} attached>
-          <Sidebar as={Menu} animation='slide along' width='thin' visible={visible} vertical>
-            <ArticleMenu
-              h2s={this.state.h2s}
-              changeSection={this.changeSection}
-              currentH2Name={this.state.h2s[this.state.currentH2]}
-            />
-          </Sidebar>
-          <Sidebar.Pusher>
+        <Grid>
+          <Grid.Column width={4}>
+            <Menu width='thin' vertical>
+              <ArticleMenu
+                h2s={this.state.h2s}
+                changeSection={this.changeSection}
+                currentH2Name={this.state.h2s[this.state.currentH2]}
+              />
+            </Menu>
+          </Grid.Column>
+          <Grid.Column stretched width={12}>
             <Carousel
               ps={this.state.ps}
               currentP={this.state.currentP}
               currentH3Name={this.state.h3s[this.state.currentH3]}
             />
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
+          </Grid.Column>
+        </Grid>
         <Button.Group attached='bottom'>
         <Button onClick={this.prev}>Previous Paragraph</Button>
         <Button onClick={this.next}>Next Paragraph</Button>
