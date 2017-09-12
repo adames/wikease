@@ -27,7 +27,7 @@ export default class SearchBar extends Component {
           results: response,
         })
       )
-    }, 800)
+    }, 500)
   }
 
   render() {

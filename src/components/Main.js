@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header'
-import SearchBar from './SearchBar'
 import Article from './Article'
+import SearchPage from './SearchPage'
 
 class Main extends Component {
   state = {
@@ -13,8 +13,7 @@ class Main extends Component {
   render() {
     return (
       <div className="Main">
-        <Header />
-        <SearchBar changeTitle={this.changeTitle} />
+        <SearchPage changeTitle={this.changeTitle} />
         <Article title={this.state.title} changeTitle={this.changeTitle}/>
       </div>
     );

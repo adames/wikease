@@ -3,3 +3,23 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.SearchBar {
+  position: absolute;
+  z-index:9000;
+  text-align:center;
+  width:100%;
+  height: 100%;
+  top:40%;
+
+}
+
+.Logo {
+  position: absolute;
+  z-index:9000;
+  text-align:center;
+  width:20%;
+  height: 20%;
+  top:20%;
+
+}

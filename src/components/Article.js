@@ -121,7 +121,7 @@ class Article extends Component {
   render() {
     const { visible } = this.state
     return (
-      <Container>
+      <Segment attached='top'>
         <Header as='h1' attached='top'>
           {this.props.title}
         </Header>
@@ -149,7 +149,7 @@ class Article extends Component {
           ps={this.state.ps[this.state.currentP]}
           changeTitle={this.props.changeTitle}
         />
-      </Container>
+      </Segment>
     )
   }
 }
