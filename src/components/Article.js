@@ -120,13 +120,13 @@ class Article extends Component {
 
   render() {
     return (
-      <Segment basic>
+      <Segment basic className="Article">
         <Header as='h1' attached='top' id="Article">
           {this.props.title}
         </Header>
         <Grid>
           <Grid.Column width={4}>
-            <Menu width='thin' vertical>
+            <Menu width='thin' stackable={true} vertical>
               <ArticleMenu
                 h2s={this.state.h2s}
                 changeSection={this.changeSection}
@@ -156,5 +156,3 @@ class Article extends Component {
 }
 
 export default Article;
-// Removed for simplicity.
-//<Button onClick={this.toggleVisibility}>Navigate {this.state.title}</Button>

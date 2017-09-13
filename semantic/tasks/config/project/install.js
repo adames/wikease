@@ -549,8 +549,8 @@ module.exports = {
             value: 'Helvetica Neue, Arial, sans-serif;'
           },
           {
-            name: 'Lato (Google Fonts)',
-            value: 'Lato'
+            name: 'Linux Libertine (Google Fonts)',
+            value: 'Linux Libertine'
           },
           {
             name: 'Open Sans (Google Fonts)',
@@ -581,8 +581,8 @@ module.exports = {
             value: 'Helvetica Neue, Arial, sans-serif;'
           },
           {
-            name: 'Lato (Import from Google Fonts)',
-            value: 'Lato'
+            name: 'Linux Libertine (Import from Google Fonts)',
+            value: 'Linux Libertine'
           },
           {
             name: 'Open Sans (Import from Google Fonts)',
