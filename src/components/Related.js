@@ -8,6 +8,7 @@ class Related extends Component {
   }
 
   handleClick = (event) => {
+    window.location = "#Article";
     this.props.changeTitle(event.currentTarget.children[1].children[0].innerText)
   }
 
@@ -41,7 +42,8 @@ class Related extends Component {
   render () {
     return (
       <Container>
-        {this.state.relatedObjects.length !== 0 &&
+        {
+          this.state.relatedObjects.length !== 0 &&
           <Segment basic padded>
             <h2 id="Related">Related Articles</h2>
           </Segment>

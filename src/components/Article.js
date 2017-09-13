@@ -121,8 +121,8 @@ class Article extends Component {
   render() {
     return (
       <Segment basic className="Article">
-        <Header as='h1' attached='top' id="Article">
-          {this.props.title}
+        <Header as='h1' textAlign='center' attached='top' id="Article">
+          {this.props.title} | {this.state.h2s[this.state.currentH2]} | {this.state.h3s[this.state.currentH3]}
         </Header>
         <Grid>
           <Grid.Column width={4}>
