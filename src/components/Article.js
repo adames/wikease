@@ -155,12 +155,14 @@ class Article extends Component {
           changeSection={this.changeSection}
           currentH2Name={this.state.h2s[this.state.currentH2]}
         />
-        <Carousel
-          ps={this.state.ps}
-          currentP={this.state.currentP}
-          currentH3Name={this.state.h3s[this.state.currentH3]}
-          currentImageName={this.state.images[this.state.currentImage]}
-        />
+        <Segment attached>
+          <Carousel
+            ps={this.state.ps}
+            currentP={this.state.currentP}
+            currentH3Name={this.state.h3s[this.state.currentH3]}
+            currentImageName={this.state.images[this.state.currentImage]}
+          />
+        </Segment>
         <Button.Group attached='bottom'>
           <Button onClick={this.prev}>Previous Paragraph</Button>
           <Button onClick={this.next}>Next Paragraph</Button>
