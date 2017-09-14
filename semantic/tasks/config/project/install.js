@@ -545,8 +545,8 @@ module.exports = {
         message: 'Select your header font',
         choices: [
           {
-            name: 'Helvetica Neue, Arial, sans-serif',
-            value: 'Helvetica Neue, Arial, sans-serif;'
+            name: 'Slabo, Arial, sans-serif',
+            value: 'Slabo, Arial, sans-serif;'
           },
           {
             name: 'Linux Libertine (Google Fonts)',
@@ -577,8 +577,8 @@ module.exports = {
         message: 'Select your page font',
         choices: [
           {
-            name: 'Helvetica Neue, Arial, sans-serif',
-            value: 'Helvetica Neue, Arial, sans-serif;'
+            name: 'Slabo, Arial, sans-serif',
+            value: 'Slabo, Arial, sans-serif;'
           },
           {
             name: 'Linux Libertine (Import from Google Fonts)',

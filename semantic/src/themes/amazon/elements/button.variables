@@ -3,7 +3,7 @@
 --------------------*/
 
 /* Button Variables */
-@pageFont: Helvetica Neue, Helvetica, Arial, sans-serif;
+@pageFont: Slabo, Helvetica, Arial, sans-serif;
 @textTransform: none;
 @textColor: #111111;
 @fontWeight: normal;

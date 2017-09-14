@@ -9,8 +9,8 @@
 @fontName          : 'Linux Libertine';
 @fontSmoothing     : antialiased;
 
-@headerFont        : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-@pageFont          : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@headerFont        : @fontName, 'Slabo', Arial, Helvetica, sans-serif;
+@pageFont          : @fontName, 'Slabo', Arial, Helvetica, sans-serif;
 
 @googleFontName    : @fontName;
 @importGoogleFonts : true;

@@ -24,7 +24,7 @@ class MenuItems extends Component {
         borderless
         stackable
         attached
-        widths={Math.min(this.props.h2s.length, 16)}
+        widths={Math.max(6, Math.min(this.props.h2s.length, 16))}
       >
         {this.buildMenu()}
       </Menu>

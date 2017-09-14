@@ -28,7 +28,7 @@ class Article extends Component {
   componentWillReceiveProps(nextProps){
     if (nextProps.title !== this.props.title) {
       this.wikipedia(nextProps.title)
-      this.bing(nextProps.title)
+      this.pixabay(nextProps.title)
     }
   }
 
@@ -45,8 +45,8 @@ class Article extends Component {
     )
   }
 
-  bing(title) {
-    fetch(`https://wikeasebackend.herokuapp.com/images?title=${title}`)
+  pixabay(title) {
+    fetch(`https://wikeasebackend.herokuapp.com/images?title=${title.replace(/\s/g, "+")}`)
     .then(res => res.json())
     .then(images =>
       this.setState({
@@ -69,7 +69,7 @@ class Article extends Component {
     let h2s = Object.keys(article)
     let h3s = Object.keys(article[h2s[this.state.currentH2]])
     let ps = article[h2s[this.state.currentH2]][h3s[this.state.currentH3]]
-    let images = ['http://homepages.neiu.edu/~whuang2/cs300/images/white.png']
+    let images = ['http://images5.fanpop.com/image/photos/29400000/White-writing-29491444-516-350.jpg']
     let currentImage = 0
 
     if (this.state.images.length > 0) {
