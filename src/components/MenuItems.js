@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu } from 'semantic-ui-react';
 
 
-class ArticleMenu extends Component {
+class MenuItems extends Component {
 
   handleClick = (event) => {
     this.props.changeSection(event.target.innerText)
@@ -18,13 +18,20 @@ class ArticleMenu extends Component {
     })
   }
 
+  //widths need to be conditional
+  
   render() {
     return (
-      <div className='ArticleMenu' >
+      <Menu
+        borderless
+        stackable
+        attached
+        widths={this.props.h2s.length}
+      >
         {this.buildMenu()}
-      </div>
+      </Menu>
     );
   }
 }
 
-export default ArticleMenu;
+export default MenuItems;

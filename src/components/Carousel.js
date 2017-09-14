@@ -19,8 +19,12 @@ export default class Carousel extends Component {
   }
 
   render() {
+    const backgroundImage = {
+      backgroundImage: "url(" + this.props.currentImageName + ")"
+    };
+
     return (
-      <div className='Carousel'>
+      <div className='Carousel' style={backgroundImage}>
         <CarouselAPI
           selectedItem={this.props.currentP}
           showThumbs={false}
