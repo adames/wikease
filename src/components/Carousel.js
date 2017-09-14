@@ -30,6 +30,7 @@ export default class Carousel extends Component {
         <CarouselAPI
           selectedItem={this.props.currentP}
           showThumbs={false}
+          emulateTouch={true}
           showIndicators={false}
           showStatus={false}
           showArrows={false}
