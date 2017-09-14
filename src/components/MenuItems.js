@@ -18,19 +18,17 @@ class MenuItems extends Component {
     })
   }
 
-  //widths need to be conditional
-  
   render() {
     return (
       <Menu
         borderless
         stackable
         attached
-        widths={this.props.h2s.length}
+        widths={Math.min(this.props.h2s.length, 16)}
       >
         {this.buildMenu()}
       </Menu>
-    );
+    )
   }
 }
 

@@ -33,7 +33,7 @@ class Article extends Component {
   }
 
   wikipedia(title) {
-    fetch(`http://localhost:8080/articles?title=${title}`)
+    fetch(`https://wikeasebackend.herokuapp.com/articles?title=${title}`)
     .then(res => res.json())
     .then(results =>
       this.setState({
@@ -46,7 +46,7 @@ class Article extends Component {
   }
 
   bing(title) {
-    fetch(`http://localhost:8080/images?title=${title}`)
+    fetch(`https://wikeasebackend.herokuapp.com/images?title=${title}`)
     .then(res => res.json())
     .then(images =>
       this.setState({
