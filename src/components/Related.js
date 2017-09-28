@@ -8,7 +8,7 @@ class Related extends Component {
   }
 
   handleClick = (event) => {
-    window.location = "#Article";
+    window.location = "#ArticleContainer";
     this.props.changeTitle(event.currentTarget.children[1].children[0].innerText)
   }
 

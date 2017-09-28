@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Article from './Article'
+import ArticleContainer from './ArticleContainer'
 import SearchPage from './SearchPage'
 
 class Main extends Component {
@@ -12,8 +12,13 @@ class Main extends Component {
   render() {
     return (
       <div className="Main">
-        <SearchPage changeTitle={this.changeTitle} />
-        <Article title={this.state.title} changeTitle={this.changeTitle}/>
+        <SearchPage
+          changeTitle={this.changeTitle}
+        />
+        <ArticleContainer
+          title={this.state.title}
+          changeTitle={this.changeTitle}
+        />
       </div>
     );
   }

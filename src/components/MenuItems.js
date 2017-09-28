@@ -11,7 +11,12 @@ class MenuItems extends Component {
   buildMenu = () => {
     return this.props.h2s.map(h2 => {
       return (
-        <Menu.Item name={h2} key={h2} active={this.props.currentH2Name === h2} onClick={this.handleClick}>
+        <Menu.Item
+          key={h2}
+          name={h2}
+          onClick={this.handleClick}
+          active={this.props.currentH2Name === h2}
+        >
           {h2}
         </Menu.Item>
       )

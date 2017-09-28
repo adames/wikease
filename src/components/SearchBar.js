@@ -11,7 +11,7 @@ export default class SearchBar extends Component {
 
   handleResultSelect = (e, { result }) => {
     this.props.changeTitle(result.title)
-    window.location = "#Article";
+    window.location = "#ArticleContainer";
     return this.resetComponent()
   }
 

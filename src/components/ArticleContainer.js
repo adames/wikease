@@ -4,7 +4,7 @@ import Carousel from './Carousel'
 import Related from './Related'
 import MenuItems from './MenuItems'
 
-class Article extends Component {
+class ArticleContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,12 +56,54 @@ class Article extends Component {
     )
   }
 
-  next = () => {
-    this.changeSection('next')
+  nextParagraph = () => {
+    if (this.state.currentP < this.state.ps.length - 1){
+      this.setState({
+        currentP: this.state.currentP + 1,
+      }, () => this.updateArticleState())
+    } else if (this.state.currentH3 < this.state.h3s.length - 1){
+      this.setState({
+        currentH3: this.state.currentH3 + 1,
+        currentP: 0,
+      }, () => this.updateArticleState())
+    } else if (this.state.currentH2 < this.state.h2s.length - 1){
+      this.setState({
+        currentH2: this.state.currentH2 + 1,
+        currentH3: 0,
+        currentP: 0,
+      }, () => this.updateArticleState())
+    } else {
+      console.log("could not execute next")
+    }
   }
 
-  prev = () => {
-    this.changeSection('previous')
+  prevParagraph = () => {
+    if (this.state.currentP > 0){
+      this.setState({
+        currentP: this.state.currentP - 1,
+      }, () => this.updateArticleState())
+    } else if (this.state.currentH3 > 0){
+      this.setState({
+        currentH3: this.state.currentH3 - 1,
+        currentP: 0,
+      }, () => this.updateArticleState())
+    } else if (this.state.currentH2 > 0){
+      this.setState({
+        currentH2: this.state.currentH2 - 1,
+        currentH3: 0,
+        currentP: 0,
+      }, () => this.updateArticleState())
+    } else {
+      console.log("could not execute previous")
+    }
+  }
+
+  changeSection = (section) => {
+    this.setState({
+      currentH2: this.state.h2s.findIndex(h2 => h2 === section),
+      currentH3: 0,
+      currentP: 0,
+    }, () => this.updateArticleState())
   }
 
   updateArticleState(){
@@ -90,64 +132,10 @@ class Article extends Component {
     }
   }
 
-  changeSection = (action) => {
-    //check if we're on the last p. if not, just change that
-    // check if we're also on the last h3. if not, change that and the previous
-    //finally, check if we're on the last h2. if not, change that and the previous
-    switch (action) {
-      case 'next':
-        if (this.state.currentP < this.state.ps.length - 1){
-          this.setState({
-            currentP: this.state.currentP + 1,
-          }, () => this.updateArticleState())
-        } else if (this.state.currentH3 < this.state.h3s.length - 1){
-          this.setState({
-            currentH3: this.state.currentH3 + 1,
-            currentP: 0,
-          }, () => this.updateArticleState())
-        } else if (this.state.currentH2 < this.state.h2s.length - 1){
-          this.setState({
-            currentH2: this.state.currentH2 + 1,
-            currentH3: 0,
-            currentP: 0,
-          }, () => this.updateArticleState())
-        } else {
-          console.log("could not execute next")
-        }
-        break;
-      case 'previous':
-        if (this.state.currentP > 0){
-          this.setState({
-            currentP: this.state.currentP - 1,
-          }, () => this.updateArticleState())
-        } else if (this.state.currentH3 > 0){
-          this.setState({
-            currentH3: this.state.currentH3 - 1,
-            currentP: 0,
-          }, () => this.updateArticleState())
-        } else if (this.state.currentH2 > 0){
-          this.setState({
-            currentH2: this.state.currentH2 - 1,
-            currentH3: 0,
-            currentP: 0,
-          }, () => this.updateArticleState())
-        } else {
-          console.log("could not execute previous")
-        }
-        break;
-      default:
-        this.setState({
-          currentH2: this.state.h2s.findIndex(h2 => h2 === action),
-          currentH3: 0,
-          currentP: 0,
-        }, () => this.updateArticleState())
-    }
-  }
-
   render() {
     return (
-      <Segment basic className="Article">
-        <Header as='h1' textAlign='center' attached='top' id="Article">
+      <Segment basic className="ArticleContainer">
+        <Header as='h1' textAlign='center' attached='top' id="ArticleContainer">
           {this.props.title}
         </Header>
         <MenuItems
@@ -164,8 +152,8 @@ class Article extends Component {
           />
         </Segment>
         <Button.Group attached='bottom'>
-          <Button onClick={this.prev}>Previous Paragraph</Button>
-          <Button onClick={this.next}>Next Paragraph</Button>
+          <Button onClick={this.prevParagraph}>Previous Paragraph</Button>
+          <Button onClick={this.nextParagraph}>Next Paragraph</Button>
         </Button.Group>
         <Related
           ps={this.state.ps[this.state.currentP]}
@@ -176,4 +164,4 @@ class Article extends Component {
   }
 }
 
-export default Article;
+export default ArticleContainer;
