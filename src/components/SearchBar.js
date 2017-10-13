@@ -11,7 +11,7 @@ export default class SearchBar extends Component {
 
   handleResultSelect = (e, { result }) => {
     this.props.changeTitle(result.title)
-    window.location = "#ArticleContainer";
+    window.location = "#Article";
     return this.resetComponent()
   }
 
@@ -38,6 +38,7 @@ export default class SearchBar extends Component {
       <Segment basic padded className='Search'>
           <Search
             fluid
+            size='tiny'
             loading={isLoading}
             showNoResults={true}
             onResultSelect={this.handleResultSelect}

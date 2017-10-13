@@ -5,6 +5,7 @@ import { Menu } from 'semantic-ui-react';
 class MenuItems extends Component {
 
   handleClick = (event) => {
+    console.log('handleClick was clicked')
     this.props.changeSection(event.target.innerText)
   }
 

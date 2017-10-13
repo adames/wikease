@@ -16,8 +16,7 @@ class ArticleContainer extends Component {
       currentH3: 0,
       ps: [],
       currentP: 0,
-      images: [],
-      currentImage: 0,
+      image: "https://nodeassets.nbcnews.com/images/non-rev/footer-logo-xfinity.svg",
     }
   }
 
@@ -28,10 +27,12 @@ class ArticleContainer extends Component {
   componentWillReceiveProps(nextProps){
     if (nextProps.title !== this.props.title) {
       this.wikipedia(nextProps.title)
-      this.pixabay(nextProps.title)
+      this.wikipediaImages(nextProps.title)
     }
   }
 
+  // Production: https://wikeasebackend.herokuapp.com
+  // Development: http://localhost:8080
   wikipedia(title) {
     fetch(`https://wikeasebackend.herokuapp.com/articles?title=${title}`)
     .then(res => res.json())
@@ -45,13 +46,12 @@ class ArticleContainer extends Component {
     )
   }
 
-  pixabay(title) {
+  wikipediaImages(title) {
     fetch(`https://wikeasebackend.herokuapp.com/images?title=${title.replace(/\s/g, "+")}`)
     .then(res => res.json())
-    .then(images =>
+    .then(results =>
       this.setState({
-        images,
-        currentImage: 0
+        image: results["image"]
       })
     )
   }
@@ -111,13 +111,6 @@ class ArticleContainer extends Component {
     let h2s = Object.keys(article)
     let h3s = Object.keys(article[h2s[this.state.currentH2]])
     let ps = article[h2s[this.state.currentH2]][h3s[this.state.currentH3]]
-    let images = ['http://images5.fanpop.com/image/photos/29400000/White-writing-29491444-516-350.jpg']
-    let currentImage = 0
-
-    if (this.state.images.length > 0) {
-      images = this.state.images
-      currentImage = (this.state.currentImage + 1) % this.state.images.length
-    }
 
     let prevState = JSON.stringify([this.state.h2s, this.state.h3s, this.state.ps])
     let nextState = JSON.stringify([h2s, h3s, ps])
@@ -126,16 +119,14 @@ class ArticleContainer extends Component {
         h2s: h2s,
         h3s: h3s,
         ps: ps,
-        images: images,
-        currentImage: currentImage,
       })
     }
   }
 
   render() {
     return (
-      <Segment basic className="ArticleContainer">
-        <Header as='h1' textAlign='center' attached='top' id="ArticleContainer">
+      <Segment basic className="Article" id="Article">
+        <Header as='h1' textAlign='center' attached='top'>
           {this.props.title}
         </Header>
         <MenuItems
@@ -148,7 +139,7 @@ class ArticleContainer extends Component {
             ps={this.state.ps}
             currentP={this.state.currentP}
             currentH3Name={this.state.h3s[this.state.currentH3]}
-            currentImageName={this.state.images[this.state.currentImage]}
+            image={this.state.image}
           />
         </Segment>
         <Button.Group attached='bottom'>
